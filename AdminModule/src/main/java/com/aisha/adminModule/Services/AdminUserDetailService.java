@@ -7,7 +7,7 @@ package com.aisha.adminModule.Services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aisha.adminModule.Entity.User;
 import com.aisha.adminModule.Repository.UserRepository;
 @Service
+@Primary
 public class AdminUserDetailService implements UserDetailsService {
 	private static final Logger log = LoggerFactory.getLogger(AdminUserDetailService.class);
 	@Autowired

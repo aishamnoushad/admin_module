@@ -23,8 +23,8 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 	private ObjectMapper objectMapper = new ObjectMapper();
 	@Override
 	 public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-	        super.onAuthenticationFailure(request, response, exception);
-	        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+	        
+	       
 	        
 //	        request.setAttribute("error", true);
 	        response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -39,5 +39,6 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 	        response.getOutputStream()
 	          .println(objectMapper.writeValueAsString(data));
 	        response.sendRedirect("/login?error");
+	        super.onAuthenticationFailure(request, response, exception);
 	    }
 }

@@ -45,9 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .authorizeRequests().antMatchers("/login", "/resource/**").permitAll()
         .and()
         .formLogin()
-        .loginPage("/login")
-        .failureHandler(MyAuthenticationFailureHandler)
         .successHandler(adminAuthenticationSuccessHandler)
+        .failureHandler(MyAuthenticationFailureHandler)
+        .loginPage("/login")
         .defaultSuccessUrl("/dashboard")
         .and().csrf().disable();
 //        .usernameParameter("username").passwordParameter("password").permitAll()

@@ -33,8 +33,5 @@ public class IndexController {
 		model.addAttribute("whatsappclickcount", genericService.getAllWhatsappClicks().stream().map(obj->obj.getCount()).collect(Collectors.toList()));
 		return "index";
 	}
-	@RequestMapping("/category")
-	public String redirectTocategory() {
-		return "category";
-	}
+	
 }

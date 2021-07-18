@@ -26,7 +26,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Categories</h1>
+                        <h1 class="mt-4">sub categories and sub of sub categories</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
@@ -34,14 +34,19 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Categories
+                                Sub Sub Categories
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>Category Code</th>
-                                            <th>Category Name</th>
+                                            
+                                            <th>Sub Category Code</th>
+                                            <th>Sub Sub Category Code</th>
+                                            <th>Category Name</th> 
+                                            <th> Sub Category Name</th>
+                                            <th> Sub Sub Category Name</th>
                                             <th>Description</th>
                                             <th>Active</th>
                                             <th colspan="2"><button class="btn btn-success"><i class="material-icons">add</i>Add</button></th>
@@ -51,7 +56,11 @@
                                     <tfoot>
                                         <tr>
                                             <th>Category Code</th>
-                                            <th>Category Name</th>
+                                            <th>Sub Category Code</th>
+                                            <th>Sub Sub Category Code</th>
+                                            <th>Category Name</th> 
+                                            <th> Sub Category Name</th>
+                                            <th> Sub Sub Category Name</th>
                                             <th>Description</th>
                                             <th>Active</th>
                                             <th colspan="2"></th>
@@ -59,12 +68,16 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                       <tr th:if="${categories.empty}">
-            								<td colspan="6"> No Categories Available </td>
+                                       <tr th:if="${subsubcategories.empty}">
+            								<td colspan="10"> No Categories Available </td>
         							  </tr>
-								        <tr th:each="category : ${categories}">
-								            <td><span th:text="${category.Category_ID}"> Title </span></td>
-								            <td><span th:text="${category.Category_Name}"> Author </span></td>
+								        <tr th:each="category : ${subsubcategories}">
+								            <td><span th:text="${category.subSubCategoryIdentity?.Category_ID}"> Title </span></td>
+								            <td><span th:text="${category.subSubCategoryIdentity?.Sub_Category_ID}"> Title </span></td>
+								            <td><span th:text="${category.subSubCategoryIdentity?.Sub_Sub_Category_ID}"> Title </span></td>
+								            <td><span th:text="${category.subCategory?.categories?.Category_Name}"> Author </span></td>
+								             <td><span th:text="${category.subCategory?.Sub_Category_Name}"> Author </span></td>
+								            <td><span th:text="${category.Sub_Sub_Category_Name}"> Author </span></td>
 								             <td><span th:text="${category.Description}"> Title </span></td>
 								            <td><span th:text="${category.Status}"> Author </span></td>
 								            <td colspan="2">

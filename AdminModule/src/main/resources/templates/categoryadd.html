@@ -8,9 +8,10 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Dashboard - ABC   Admin</title>
+     
+       
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
-       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,7 +26,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Categories</h1>
+                        <h1 class="mt-4">New Category Addition</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
@@ -33,48 +34,23 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Categories
+                                Category Addition
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Category Code</th>
-                                            <th>Category Name</th>
-                                            <th>Description</th>
-                                            <th>Active</th>
-                                            <th colspan="2"><a href="/category/add"  class="btn btn-success"><i class="material-icons">add</i>Add</a></th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Category Code</th>
-                                            <th>Category Name</th>
-                                            <th>Description</th>
-                                            <th>Active</th>
-                                            <th colspan="2"></th>
-                                            
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                       <tr th:if="${categories.empty}">
-            								<td colspan="6"> No Categories Available </td>
-        							  </tr>
-								        <tr th:each="category : ${categories}">
-								            <td><span th:text="${category.Category_ID}"> Title </span></td>
-								            <td><span th:text="${category.Category_Name}"> Author </span></td>
-								             <td><span th:text="${category.Description}"> Title </span></td>
-								            <td><span th:text="${category.Status}"> Author </span></td>
-								            <td colspan="2">
-								            <a  th:href="@{/category/delete/{category_id}(category_id = ${category.Category_ID})}" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
-								            <a th:href="@{/category/update/{category_id}(category_id = ${category.Category_ID})}" class="btn btn-secondary" type="button"><i class="material-icons">update</i>Update</a>
-								            </td>
-								        </tr>
-                                       
-                                       
-                                    </tbody>
-                                </table>
+                            
+                           
+							    <form action="#" th:action="@{/category/add}" th:object="${categories}" method="post">
+							    	<p>Category Id: <input type="text" th:field="*{Category_ID}" /></p>
+							    	<p>Category Name: <input type="text" th:field="*{Category_Name}" /></p>
+							    	<p>Description: <input type="text" th:field="*{Description}" /></p>
+							        <p>Status : <select th:field="*{Status}">
+												    <option th:value="Active" th:text="Active"></option>
+												    <option th:value="Inactive" th:text="Inactive"></option>
+												</select>
+									</p>
+							        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+							    </form>
+                               
                             </div>
                         </div>
                     </div>

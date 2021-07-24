@@ -1,6 +1,6 @@
 package com.aisha.adminModule.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import javax.persistence.EmbeddedId;
@@ -21,8 +21,8 @@ public class SubCategory {
 	public String Sub_Category_Name;
 	public String Description;
 	public String Status;
-	private Date updated_at;
-	private Date created_at;
+	private LocalDate updated_at;
+	private LocalDate created_at;
 	public SubCategoryIdentity getSubCategoryIdentity() {
 		return subCategoryIdentity;
 	}
@@ -47,20 +47,20 @@ public class SubCategory {
 	public void setStatus(String status) {
 		Status = status;
 	}
-	public Date getUpdated_at() {
+	public LocalDate getUpdated_at() {
 		return updated_at;
 	}
-	public void setUpdated_at(Date updated_at) {
+	public void setUpdated_at(LocalDate updated_at) {
 		this.updated_at = updated_at;
 	}
-	public Date getCreated_at() {
+	public LocalDate getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(LocalDate created_at) {
 		this.created_at = created_at;
 	}
 	public SubCategory(SubCategoryIdentity subCategoryIdentity, String sub_Category_Name, String description,
-			String status, Date updated_at, Date created_at) {
+			String status, LocalDate updated_at, LocalDate created_at) {
 		super();
 		this.subCategoryIdentity = subCategoryIdentity;
 		Sub_Category_Name = sub_Category_Name;

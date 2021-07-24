@@ -1,11 +1,13 @@
 package com.aisha.adminModule.Services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aisha.adminModule.Entity.Categories;
 import com.aisha.adminModule.Entity.SubCategory;
 import com.aisha.adminModule.Entity.SubCategoryIdentity;
 import com.aisha.adminModule.Repository.SubCategoryRepository;
@@ -23,5 +25,14 @@ public class SubCategoryService {
 	public Optional<SubCategory> findBySubCategoryIdentity(String catid, String subcatid){
 		
 		return subCategoryRepository.findById(new SubCategoryIdentity(catid,subcatid));
+	}
+	
+	public SubCategory saveSubCategory(SubCategory newSubCategory) {
+		newSubCategory.setCreated_at(LocalDate.now());
+		newSubCategory.setUpdated_at(LocalDate.now());
+		return subCategoryRepository.saveAndFlush(newSubCategory);
+	}
+	public void deleteSubCategory(String CatId, String Subcatid) {
+		subCategoryRepository.deleteById(new SubCategoryIdentity(CatId, Subcatid));
 	}
 }

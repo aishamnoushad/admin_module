@@ -32,11 +32,11 @@ public class SubSubCategoryController {
 	
 	@RequestMapping("/subsubcategory")
 	public String redirectToSubSubcategory(Model model) {
-		
-		
 		subSubCategoryService.getAllSubSubCategories().stream().forEach(t->{
-			t.setSubCategory(subCategoryService.findBySubCategoryIdentity(t.getSubSubCategoryIdentity().getCategory_ID(),t.getSubSubCategoryIdentity().getSub_Category_ID()));
-			t.getSubCategory().setCategories(categoryService.findByCategoryId(t.getSubSubCategoryIdentity().getCategory_ID()));
+			if(subCategoryService.findBySubCategoryIdentity(t.getSubSubCategoryIdentity().getCategory_ID(),t.getSubSubCategoryIdentity().getSub_Category_ID()).isPresent())
+				t.setSubCategory(subCategoryService.findBySubCategoryIdentity(t.getSubSubCategoryIdentity().getCategory_ID(),t.getSubSubCategoryIdentity().getSub_Category_ID()));
+			if(categoryService.findByCategoryId(t.getSubSubCategoryIdentity().getCategory_ID()).isPresent())
+				t.getSubCategory().setCategories(categoryService.findByCategoryId(t.getSubSubCategoryIdentity().getCategory_ID()));
 		});
 		model.addAttribute("subsubcategories", subSubCategoryService.getAllSubSubCategories());
 		return "subsubcategory";
@@ -52,6 +52,12 @@ public class SubSubCategoryController {
 	@GetMapping("/getSubCategories")
 	public  List<SubCategory> getSubCategories(@RequestParam(value = "category_id", required = true) String catid) {
 		return subCategoryService.getAllSubCategoryOfSelected(catid);
+		
+	}
+	@ResponseBody
+	@GetMapping("/getSubSubCategories")
+	public  List<SubSubCategory> getSubSubCategories(@RequestParam(value = "category_id", required = true) String catid,@RequestParam(value = "sub_category_id", required = true) String subcatid) {
+		return subSubCategoryService.getAllSubSubCategoryOfSelected(catid, subcatid);
 		
 	}
 	@PostMapping("/subsubcategory/add")

@@ -3,6 +3,7 @@ package com.aisha.adminModule.Services;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,9 @@ public class SubSubCategoryService {
 	}
 	public void deleteSubSubCategory(String catid, String subcatid, String subsubcatid) {
 		subSubCategoryRepository.deleteById(new SubSubCategoryIdentity(catid, subcatid, subsubcatid));;
+	}
+	
+	public List<SubSubCategory> getAllSubSubCategoryOfSelected(String catid , String subcatid ){
+		return subSubCategoryRepository.findAll().stream().filter(t->((t.getSubSubCategoryIdentity().getCategory_ID().equalsIgnoreCase(catid))&&(t.getSubSubCategoryIdentity().getSub_Category_ID().equalsIgnoreCase(subcatid)))).collect(Collectors.toList());
 	}
 }

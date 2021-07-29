@@ -40,6 +40,7 @@
                             
                            
 							    <form action="#" th:action="@{/subcategory/add}" th:object="${subcategory}" method="post">
+							    <input type="hidden" th:field="*{FromValue}" th:value="Add"/>
 							    	<p>Category Id: <select th:field="*{subCategoryIdentity.Category_ID}">
 										<option th:each="category : ${AllCategories}" th:value="${category.Category_ID}" th:text="${category.Category_Name}">
 										</option>

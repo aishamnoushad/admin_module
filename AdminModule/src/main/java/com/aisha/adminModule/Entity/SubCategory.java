@@ -82,6 +82,16 @@ public class SubCategory {
 	@Autowired
 	Categories categories;
 	
+	// non db field //
+		@Transient
+		private String FromValue;
+		public String getFromValue() {
+			return FromValue;
+		}
+		public void setFromValue(String fromValue) {
+			FromValue = fromValue;
+		}
+	
 	public Categories getCategories() {
 		return categories;
 	}

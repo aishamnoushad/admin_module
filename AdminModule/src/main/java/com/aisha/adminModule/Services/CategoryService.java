@@ -25,8 +25,16 @@ public class CategoryService {
 	
 	
 	public Categories saveCategory(Categories newCategory) {
-		newCategory.setCreated_at(LocalDateTime.now());
-		newCategory.setUpdated_at(LocalDateTime.now());
+		
+		if(newCategory.getFromValue().equalsIgnoreCase("Add") ) {
+			newCategory.setCreated_at(LocalDateTime.now());
+			newCategory.setUpdated_at(LocalDateTime.now());
+		}else {
+			newCategory.setUpdated_at(LocalDateTime.now());
+			if(!categoryRepository.findById(newCategory.getCategory_ID()).isPresent())
+			    newCategory.setCreated_at(LocalDateTime.now());
+//			System.out.println(newCategory.getFromValue()+" and created at"+ newCategory.getCreated_at());
+		}
 		return categoryRepository.saveAndFlush(newCategory);
 	}
 	

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="categories")
@@ -67,6 +68,15 @@ public class Categories {
 		
 	}
 	
+	// non db field //
+	@Transient
+	private String FromValue;
+	public String getFromValue() {
+		return FromValue;
+	}
+	public void setFromValue(String fromValue) {
+		FromValue = fromValue;
+	}
 	
 
 }

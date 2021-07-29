@@ -463,6 +463,16 @@ public class Product {
 	@Autowired
 	@Transient
 	SubSubCategory subSubCategoryDetails;
+	
+	// non db field //
+		@Transient
+		private String FromValue;
+		public String getFromValue() {
+			return FromValue;
+		}
+		public void setFromValue(String fromValue) {
+			FromValue = fromValue;
+		}
 
 	public Categories getCategoryDetails() {
 		return categoryDetails;

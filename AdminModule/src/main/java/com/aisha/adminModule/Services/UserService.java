@@ -1,5 +1,7 @@
 package com.aisha.adminModule.Services;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ public class UserService {
 	    String encodedPassword = passwordEncoder.encode(user.getPassword());
 	    user.setPassword(encodedPassword);
 	    user.setIsApproved(false);
+	    user.setCreated_at(LocalDateTime.now());
+	    user.setUpdated_at(LocalDateTime.now());
 		return userRepository.saveAndFlush(user);
 	}
 

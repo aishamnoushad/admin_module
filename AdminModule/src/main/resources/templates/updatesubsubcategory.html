@@ -42,6 +42,8 @@
                             </div>
                             <div class="card-body">
                             	<form action="#" th:action="@{/subsubcategory/add}" th:object="${selSubSubCategory}" method="post">
+                            	<input type="hidden" th:field="*{FromValue}" th:value="Update"/>
+                            	<input type="hidden" th:field="*{created_at}" th:value="${selSubSubCategory.created_at}"/>
 							    	<p>Category Id: <select id="category1" th:field="*{SubSubCategoryIdentity.Category_ID}">
 							    	<option value="">---Select---</option>
 										<option th:each="category : ${AllCategories}" 

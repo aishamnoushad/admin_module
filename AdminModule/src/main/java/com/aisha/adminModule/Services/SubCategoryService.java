@@ -28,8 +28,14 @@ public class SubCategoryService {
 	}
 	
 	public SubCategory saveSubCategory(SubCategory newSubCategory) {
-		newSubCategory.setCreated_at(LocalDateTime.now());
-		newSubCategory.setUpdated_at(LocalDateTime.now());
+		if(newSubCategory.getFromValue().equalsIgnoreCase("Add")) {
+			newSubCategory.setCreated_at(LocalDateTime.now());
+			newSubCategory.setUpdated_at(LocalDateTime.now());
+		}else {
+			newSubCategory.setUpdated_at(LocalDateTime.now());
+			if(!subCategoryRepository.findById(newSubCategory.getSubCategoryIdentity()).isPresent());
+				 newSubCategory.setCreated_at(LocalDateTime.now());
+		}
 		return subCategoryRepository.saveAndFlush(newSubCategory);
 	}
 	public void deleteSubCategory(String CatId, String Subcatid) {

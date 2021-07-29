@@ -41,6 +41,8 @@
 						</div>
 						<div class="card-body">
 							<form action="#" th:action="@{/products/add}" th:object="${ProductItem}" method="post" enctype="multipart/form-data">
+							<input type="hidden" th:field="*{FromValue}"  th:value="Update"/>
+							<input type="hidden" th:field="*{Created_at}" th:value="${ProductItem?.Created_at}"/>
 								<fieldset>
 									<legend>General Product Details</legend>
 									<table>

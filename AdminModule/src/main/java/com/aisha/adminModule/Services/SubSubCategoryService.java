@@ -27,8 +27,12 @@ public class SubSubCategoryService {
 	}
 
 	public SubSubCategory saveSubCategory(SubSubCategory newSubCategory) {
-		newSubCategory.setCreated_at(LocalDateTime.now());
-		newSubCategory.setUpdated_at(LocalDateTime.now());
+		if(newSubCategory.getFromValue().equalsIgnoreCase("Add")) {
+			newSubCategory.setCreated_at(LocalDateTime.now());
+			newSubCategory.setUpdated_at(LocalDateTime.now());
+		}else {
+			newSubCategory.setUpdated_at(LocalDateTime.now());
+		}
 		return subSubCategoryRepository.saveAndFlush(newSubCategory);
 		
 	}

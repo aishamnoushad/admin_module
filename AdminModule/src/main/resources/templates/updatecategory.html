@@ -40,6 +40,8 @@
                             
                            
 							    <form action="#" th:action="@{/category/add}" th:object="${selCategory}" method="post">
+							    <input type="hidden" th:field="*{FromValue}" th:value="Update"/>
+							     <input type="hidden" th:field="*{created_at}" th:value="${selCategory.created_at}"/>
 							    	<p>Category Id: <input type="text" th:field="*{Category_ID}" th:value="${selCategory.Category_ID}" />
 								    	
 										</p>

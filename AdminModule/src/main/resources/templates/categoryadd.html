@@ -40,6 +40,7 @@
                             
                            
 							    <form action="#" th:action="@{/category/add}" th:object="${categories}" method="post">
+							    <input type="hidden" th:field="*{FromValue}" th:value="Add"/>
 							    	<p>Category Id: <input type="text" th:field="*{Category_ID}" /></p>
 							    	<p>Category Name: <input type="text" th:field="*{Category_Name}" /></p>
 							    	<p>Description: <input type="text" th:field="*{Description}" /></p>

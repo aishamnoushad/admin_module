@@ -115,6 +115,15 @@ public class SubSubCategory {
 	/**
 	 * @return the subCategory
 	 */
+	// non db field //
+		@Transient
+		private String FromValue;
+		public String getFromValue() {
+			return FromValue;
+		}
+		public void setFromValue(String fromValue) {
+			FromValue = fromValue;
+		}
 	public SubCategory getSubCategory() {
 		return subCategory;
 	}

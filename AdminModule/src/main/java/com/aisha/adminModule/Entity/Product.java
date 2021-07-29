@@ -1,6 +1,6 @@
 package com.aisha.adminModule.Entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,9 +72,9 @@ public class Product {
 	@Column(name="TechnicalSheet")
 	private String TechnicalSheet;
 	@Column(name="created_at")
-	private LocalDate Created_at;
+	private LocalDateTime Created_at;
 	@Column(name="updated_at")
-	private LocalDate Updated_at;
+	private LocalDateTime Updated_at;
 
 	
 	public String getProduct_id() {
@@ -357,19 +357,19 @@ public class Product {
 		TechnicalSheet = technicalSheet;
 	}
 
-	public LocalDate getCreated_at() {
+	public LocalDateTime getCreated_at() {
 		return Created_at;
 	}
 
-	public void setCreated_at(LocalDate created_at) {
+	public void setCreated_at(LocalDateTime created_at) {
 		Created_at = created_at;
 	}
 
-	public LocalDate getUpdated_at() {
+	public LocalDateTime getUpdated_at() {
 		return Updated_at;
 	}
 
-	public void setUpdated_at(LocalDate updated_at) {
+	public void setUpdated_at(LocalDateTime updated_at) {
 		Updated_at = updated_at;
 	}
 
@@ -386,7 +386,7 @@ public class Product {
 			double outlet_diameter, String available_variance, String brand, String unit_of_measurement,
 			double unit_price, String category, String type, String application, String mainImage, String thumpnail1,
 			String thumpnail2, String thumpnail3, String thumpnail4, String thumpnail5, String thumpnail6,
-			String technicalSheet, LocalDate created_at, LocalDate updated_at, Categories categoryDetails,
+			String technicalSheet, LocalDateTime created_at, LocalDateTime updated_at, Categories categoryDetails,
 			SubCategory subCategoryDetails, SubSubCategory subSubCategoryDetails) {
 		super();
 		Product_id = product_id;

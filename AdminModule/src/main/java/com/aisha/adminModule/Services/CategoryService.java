@@ -1,6 +1,6 @@
 package com.aisha.adminModule.Services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +25,8 @@ public class CategoryService {
 	
 	
 	public Categories saveCategory(Categories newCategory) {
-		newCategory.setCreated_at(LocalDate.now());
-		newCategory.setUpdated_at(LocalDate.now());
+		newCategory.setCreated_at(LocalDateTime.now());
+		newCategory.setUpdated_at(LocalDateTime.now());
 		return categoryRepository.saveAndFlush(newCategory);
 	}
 	

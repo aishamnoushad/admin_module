@@ -28,7 +28,7 @@ public class AdminUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		User user = userRepository.findByEmail(email);
-        if (user == null) {
+        if (user == null || user.getIsApproved() == false) {
             throw new UsernameNotFoundException(email);
         }
         log.info("loadUserByUsername() : {}", email);

@@ -1,6 +1,6 @@
 package com.aisha.adminModule.Services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,8 +28,8 @@ public class SubCategoryService {
 	}
 	
 	public SubCategory saveSubCategory(SubCategory newSubCategory) {
-		newSubCategory.setCreated_at(LocalDate.now());
-		newSubCategory.setUpdated_at(LocalDate.now());
+		newSubCategory.setCreated_at(LocalDateTime.now());
+		newSubCategory.setUpdated_at(LocalDateTime.now());
 		return subCategoryRepository.saveAndFlush(newSubCategory);
 	}
 	public void deleteSubCategory(String CatId, String Subcatid) {

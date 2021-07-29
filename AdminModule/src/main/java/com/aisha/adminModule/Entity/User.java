@@ -1,5 +1,6 @@
 package com.aisha.adminModule.Entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -26,11 +27,12 @@ public class User {
 	private String remember_token;
 	private String mobileNumber;
 	private String profile_photo_path;
-	private Date created_at;
-	private Date updated_at;
+	private LocalDateTime created_at;
+	private LocalDateTime updated_at;
+	private Boolean isApproved;
 
 	public User(int id, String name, String email, Date email_verified_at, String password, int role, String roleName,
-			String remember_token, String mobileNumber, String profile_photo_path, Date created_at, Date updated_at) {
+			String remember_token, String mobileNumber, String profile_photo_path, LocalDateTime created_at, LocalDateTime updated_at,Boolean isApproved) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -44,6 +46,7 @@ public class User {
 		this.profile_photo_path = profile_photo_path;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
+		this.isApproved=isApproved;
 	}
 	public int getId() {
 		return id;
@@ -105,25 +108,32 @@ public class User {
 	public void setProfile_photo_path(String profile_photo_path) {
 		this.profile_photo_path = profile_photo_path;
 	}
-	public Date getCreated_at() {
+	public LocalDateTime getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(LocalDateTime created_at) {
 		this.created_at = created_at;
 	}
-	public Date getUpdated_at() {
+	public LocalDateTime getUpdated_at() {
 		return updated_at;
 	}
-	public void setUpdated_at(Date updated_at) {
+	public void setUpdated_at(LocalDateTime updated_at) {
 		this.updated_at = updated_at;
+	}
+	public Boolean getIsApproved() {
+		return isApproved;
+	}
+	public void setIsApproved(Boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", email_verified_at=" + email_verified_at
 				+ ", password=" + password + ", role=" + role + ", roleName=" + roleName + ", remember_token="
 				+ remember_token + ", mobileNumber=" + mobileNumber + ", profile_photo_path=" + profile_photo_path
-				+ ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
+				+ ", created_at=" + created_at + ", updated_at=" + updated_at + ", isApproved=" + isApproved + "]";
 	}
+
 
 
 }

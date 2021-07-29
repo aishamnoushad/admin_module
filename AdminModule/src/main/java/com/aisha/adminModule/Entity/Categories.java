@@ -1,6 +1,7 @@
 package com.aisha.adminModule.Entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,8 +15,8 @@ public class Categories {
 	private String Category_Name;
 	private String Description;
 	private String Status;
-	private LocalDate updated_at;
-	private LocalDate created_at;
+	private LocalDateTime updated_at;
+	private LocalDateTime created_at;
 	public String getCategory_ID() {
 		return Category_ID;
 	}
@@ -40,20 +41,20 @@ public class Categories {
 	public void setStatus(String status) {
 		Status = status;
 	}
-	public LocalDate getUpdated_at() {
+	public LocalDateTime getUpdated_at() {
 		return updated_at;
 	}
-	public void setUpdated_at(LocalDate updated_at) {
+	public void setUpdated_at(LocalDateTime updated_at) {
 		this.updated_at = updated_at;
 	}
-	public LocalDate getCreated_at() {
+	public LocalDateTime getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(LocalDate created_at) {
+	public void setCreated_at(LocalDateTime created_at) {
 		this.created_at = created_at;
 	}
-	public Categories(String category_ID, String category_Name, String description, String status, LocalDate updated_at,
-			LocalDate created_at) {
+	public Categories(String category_ID, String category_Name, String description, String status, LocalDateTime updated_at,
+			LocalDateTime created_at) {
 		super();
 		Category_ID = category_ID;
 		Category_Name = category_Name;

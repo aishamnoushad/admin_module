@@ -1,6 +1,6 @@
 package com.aisha.adminModule.Services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aisha.adminModule.Entity.SubCategory;
-import com.aisha.adminModule.Entity.SubCategoryIdentity;
 import com.aisha.adminModule.Entity.SubSubCategory;
 import com.aisha.adminModule.Entity.SubSubCategoryIdentity;
 import com.aisha.adminModule.Repository.SubSubCategoryRepository;
@@ -29,8 +27,8 @@ public class SubSubCategoryService {
 	}
 
 	public SubSubCategory saveSubCategory(SubSubCategory newSubCategory) {
-		newSubCategory.setCreated_at(LocalDate.now());
-		newSubCategory.setUpdated_at(LocalDate.now());
+		newSubCategory.setCreated_at(LocalDateTime.now());
+		newSubCategory.setUpdated_at(LocalDateTime.now());
 		return subSubCategoryRepository.saveAndFlush(newSubCategory);
 		
 	}

@@ -4,6 +4,9 @@ package com.aisha.adminModule.Services;
 
 
 
+import javax.security.sasl.AuthenticationException;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +31,10 @@ public class AdminUserDetailService implements UserDetailsService {
 		// TODO Auto-generated method stub
 		User user = userRepository.findByEmail(email);
         if (user == null || user.getIsApproved() == false) {
-            throw new UsernameNotFoundException(email);
+//            throw new UsernameNotFoundException(email);
+        	throw new UsernameNotFoundException(email+" The user is not authorised to access admin module");
+        }else if(user.getIsApproved() == false) {
+        	//throw new Exception(email+ "has no permission to access Admin Module ");
         }
         log.info("loadUserByUsername() : {}", email);
 

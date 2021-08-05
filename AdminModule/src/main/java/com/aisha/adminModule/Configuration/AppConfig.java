@@ -2,14 +2,17 @@ package com.aisha.adminModule.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.session.jdbc.config.annotation.SpringSessionDataSource;
 
 import com.aisha.adminModule.Entity.User;
 import com.aisha.adminModule.Services.AdminUserDetailService;
-import com.aisha.adminModule.handlers.ActiveUserStore;
 import com.aisha.adminModule.handlers.MyAuthenticationFailureHandler;
 
 @Configuration
@@ -44,5 +47,5 @@ public class AppConfig {
 //    public ActiveUserStore activeUserStore(){
 //        return new ActiveUserStore();
 //    }
-	
+   
 }

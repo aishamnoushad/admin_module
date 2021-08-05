@@ -19,10 +19,10 @@ import com.aisha.adminModule.Services.MyUserPrincipal;
 public class LoginController {
 	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	public String login() {
+//		return "login";
+//	}
 
 	@RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
 	public String loginError(Model model) {
@@ -36,33 +36,34 @@ public class LoginController {
 		return "error-forbidden";
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(SessionStatus session) {
-		SecurityContextHolder.getContext().setAuthentication(null);
-		session.setComplete();
-		return "redirect:/login";
-	}
+//	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+//	public String logout(SessionStatus session) {
+//		SecurityContextHolder.getContext().setAuthentication(null);
+//		session.setComplete();
+//		return "redirect:/login";
+//	}
 
-	@RequestMapping(value = "/postLogin", method = RequestMethod.POST)
-	public String postLogin(Model model, HttpSession session) {
-		log.info("postLogin()");
-
-		// read principal out of security context and set it to session
-		UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-		validatePrinciple(authentication.getPrincipal());
-//		User loggedInUser = ((MyUserPrincipal) authentication.getPrincipal()).MyUserPrincipal();
+//	@RequestMapping(value = "/postLogin", method = RequestMethod.POST)
+//	public String postLogin(Model model, HttpSession session) {
+//		log.info("postLogin()");
+//
+//		// read principal out of security context and set it to session
+//		UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+//		validatePrinciple(authentication.getPrincipal());
+//		User loggedInUser = ((MyUserPrincipal) authentication.getPrincipal()).getUser();
 //
 //		model.addAttribute("currentUserId", loggedInUser.getId());
-//		model.addAttribute("currentUser", loggedInUser.getUsername());
+//		model.addAttribute("currentUser", loggedInUser.getName());
 //		session.setAttribute("userId", loggedInUser.getId());
-		return "redirect:/dashboard";
-	}
+//		session.setAttribute("ActiveUser", loggedInUser);
+//		return "redirect:/dashboard";
+//	}
 
-	private void validatePrinciple(Object principal) {
-		if (!(principal instanceof MyUserPrincipal)) {
-			throw new  IllegalArgumentException("Principal can not be null!");
-		}
-	}
+//	private void validatePrinciple(Object principal) {
+//		if (!(principal instanceof MyUserPrincipal)) {
+//			throw new  IllegalArgumentException("Principal can not be null!");
+//		}
+//	}
 	
 	
 }

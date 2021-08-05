@@ -19,6 +19,7 @@ public class UserService {
 	    String encodedPassword = passwordEncoder.encode(user.getPassword());
 	    user.setPassword(encodedPassword);
 	    user.setIsApproved(false);
+	    user.setRole(3);
 	    user.setCreated_at(LocalDateTime.now());
 	    user.setUpdated_at(LocalDateTime.now());
 		return userRepository.saveAndFlush(user);

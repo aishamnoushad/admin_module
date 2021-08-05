@@ -134,55 +134,7 @@ public class ProductController {
 			}
 			System.out.println(newProduct.toString());
 			productService.saveProduct(newProduct);
-//			if(multipartFile.isPresent()) {
-//			String MainfileName = StringUtils.cleanPath(multipartFile.get().getOriginalFilename());
-//			newProduct.setMainImage(MainfileName);
-//			FileUploadUtil.saveFile(uploadDir, MainfileName  , thumpnail1.get());
-//		}else {
-//			newProduct.setMainImage("");
-//		}
-//			if(thumpnail1.isPresent()) {
-//				String MainfileName = StringUtils.cleanPath(thumpnail1.get().getOriginalFilename());
-//				newProduct.setMainImage(MainfileName);
-//				FileUploadUtil.saveFile(uploadDir, MainfileName  , thumpnail1.get());
-//			}else {
-//				newProduct.setMainImage("");
-//			}
-//			if(thumpnail2.isPresent()) {
-//				String MainfileName = StringUtils.cleanPath(thumpnail2.get().getOriginalFilename());
-//				newProduct.setMainImage(MainfileName);
-//				FileUploadUtil.saveFile(uploadDir, MainfileName  , thumpnail2.get());
-//			}else {
-//				newProduct.setMainImage("");
-//			}
-//			if(thumpnail3.isPresent()) {
-//				String MainfileName = StringUtils.cleanPath(thumpnail3.get().getOriginalFilename());
-//				newProduct.setMainImage(MainfileName);
-//				FileUploadUtil.saveFile(uploadDir, MainfileName  , thumpnail3.get());
-//			}else {
-//				newProduct.setMainImage("");
-//			 }
-//			if(thumpnail4.isPresent()) {
-//				String MainfileName = StringUtils.cleanPath(thumpnail4.get().getOriginalFilename());
-//				newProduct.setMainImage(MainfileName);
-//				FileUploadUtil.saveFile(uploadDir, MainfileName  , thumpnail4.get());
-//			}else {
-//				newProduct.setMainImage("");
-//			}
-//			if(thumpnail5.isPresent()) {
-//				String MainfileName = StringUtils.cleanPath(thumpnail5.get().getOriginalFilename());
-//				newProduct.setMainImage(MainfileName);
-//				FileUploadUtil.saveFile(uploadDir, MainfileName  , thumpnail5.get());
-//			}else {
-//				newProduct.setMainImage("");
-//			}
-//			if(thumpnail6.isPresent()) {
-//				String MainfileName = StringUtils.cleanPath(thumpnail6.get().getOriginalFilename());
-//				newProduct.setMainImage(MainfileName);
-//				FileUploadUtil.saveFile(uploadDir, MainfileName  , thumpnail6 .get());
-//			}else {
-//				newProduct.setMainImage("");
-//			}
+
 
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());

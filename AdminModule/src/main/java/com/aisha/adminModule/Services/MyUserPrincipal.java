@@ -16,12 +16,18 @@ public class MyUserPrincipal implements UserDetails {
 	 */
 	@Autowired
 	private User user;
+	
+	 public MyUserPrincipal() {
+	        
+	    }
 
     public MyUserPrincipal(User user) {
         this.setUser(user);
     }
     //...
-
+    public Boolean getIsApproved() {
+    	return user.getIsApproved();
+    }
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -33,7 +39,7 @@ public class MyUserPrincipal implements UserDetails {
 		// TODO Auto-generated method stub
 		return user.getPassword();
 	}
-
+	
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub

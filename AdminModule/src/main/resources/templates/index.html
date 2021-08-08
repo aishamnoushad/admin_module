@@ -1,45 +1,56 @@
 <!DOCTYPE html>
-<html xmlns="http://www.abcgroupuae.com"
-      xmlns:th="http://www.thymeleaf.org">
-   <head >
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Dashboard - ABC   Admin</title>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="sb-nav-fixed">
-    <input type="hidden" th:value="${whatsappclick}" id="dates"/>
-     <input type="hidden" th:value="${whatsappclickcount}" id="count"/>
-    <div th:replace="fragments/header :: header">...</div>
-        
-        <div id="layoutSidenav">
-            <div th:replace="fragments/sidenavbar :: sidenavbar">...</div>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"><div th:each="user : ${users}">
-        <p th:text="${user}">user</p>
-    </div></li>
-                        </ol>
-                        <div th:replace="fragments/cards :: cards">...</div>
-                        <div th:replace="fragments/chartArea :: chartArea">...</div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                DataTable Example
-                            </div>
-                            <div class="card-body">
-                            <div th:each="whatsappclick : ${whatsappclick}">
-    Subject: <h4 th:text="${whatsappclick}" />
-    Subject Grade Goal: <h4 th:text="${#dates.format(whatsappclick, 'dd-MMM')}" />
+<html xmlns="http://www.abcgroupuae.com" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Dashboard - ABC Admin</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+		crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+	<input type="hidden" th:value="${whatsappclick}" id="dates" />
+	<input type="hidden" th:value="${whatsappclickcount}" id="count" />
+	<div th:replace="fragments/header :: header">...</div>
+
+	<div id="layoutSidenav">
+		<div th:replace="fragments/sidenavbar :: sidenavbar">...</div>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<h1 class="mt-4">Dashboard</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item active">
+							<div th:each="user : ${users}">
+								<p th:text="${user}">user</p>
+							</div>
+						</li>
+					</ol>
+					<div sec:authorize="isAuthenticated()">
+						Welcome <b><span sec:authentication="name">Username</span></b>
+						&nbsp;
+						<i> with Roles &nbsp; <span sec:authentication="principal.authorities">Roles</span></i>
+					</div>
+					<div th:replace="fragments/cards :: cards">...</div>
+					<div th:replace="fragments/chartArea :: chartArea">...</div>
+					<div class="card mb-4">
+						<div class="card-header">
+							<i class="fas fa-table me-1"></i>
+							DataTable Example
+						</div>
+						<div class="card-body">
+							<div th:each="whatsappclick : ${whatsappclick}">
+								Subject:
+								<h4 th:text="${whatsappclick}" />
+								Subject Grade Goal: <h4 th:text="${#dates.format(whatsappclick, 'dd-MMM')}" />
     <!-- Other Properties -->
 </div>
                                 <table id="datatablesSimple">

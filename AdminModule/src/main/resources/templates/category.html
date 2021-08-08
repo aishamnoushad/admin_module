@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.abcgroupuae.com"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
    <head >
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -43,7 +44,7 @@
                                             <th>Category Name</th>
                                             <th>Description</th>
                                             <th>Active</th>
-                                            <th colspan="2"><a href="/category/add"  class="btn btn-success"><i class="material-icons">add</i>Add</a></th>
+                                            <th colspan="2"><a sec:authorize="hasAnyAuthority('ADMIN_MANAGER', 'ADMIN')" href="/category/add"  class="btn btn-success"><i class="material-icons">add</i>Add</a></th>
                                             
                                         </tr>
                                     </thead>
@@ -67,8 +68,8 @@
 								             <td><span th:text="${category.Description}"> Title </span></td>
 								            <td><span th:text="${category.Status}"> Author </span></td>
 								            <td colspan="2">
-								            <a  th:href="@{/category/delete/{category_id}(category_id = ${category.Category_ID})}" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
-								            <a th:href="@{/category/update/{category_id}(category_id = ${category.Category_ID})}" class="btn btn-secondary" type="button"><i class="material-icons">update</i>Update</a>
+								            <a sec:authorize="hasAnyAuthority('ADMIN_MANAGER', 'ADMIN')" th:href="@{/category/delete/{category_id}(category_id = ${category.Category_ID})}" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+								            <a sec:authorize="hasAnyAuthority('ADMIN_MANAGER', 'ADMIN')" th:href="@{/category/update/{category_id}(category_id = ${category.Category_ID})}" class="btn btn-secondary" type="button"><i class="material-icons">update</i>Update</a>
 								            </td>
 								        </tr>
                                        

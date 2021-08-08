@@ -1,12 +1,17 @@
 package com.aisha.adminModule.Services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.aisha.adminModule.Entity.RoleTB;
 import com.aisha.adminModule.Entity.User;
 
 @Component
@@ -16,6 +21,7 @@ public class MyUserPrincipal implements UserDetails {
 	 */
 	@Autowired
 	private User user;
+	
 	
 	 public MyUserPrincipal() {
 	        
@@ -28,11 +34,19 @@ public class MyUserPrincipal implements UserDetails {
     public Boolean getIsApproved() {
     	return user.getIsApproved();
     }
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<RoleTB> roles = user.getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+         
+        for (RoleTB role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getRole_name()));
+        }
+         
+        return authorities;
+    }
+	
 
 	@Override
 	public String getPassword() {

@@ -10,12 +10,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.session.jdbc.config.annotation.SpringSessionDataSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.aisha.adminModule.Entity.User;
 import com.aisha.adminModule.Services.AdminUserDetailService;
 import com.aisha.adminModule.handlers.MyAuthenticationFailureHandler;
 
 @Configuration
+@EnableTransactionManagement
 public class AppConfig {
 
 	@Bean

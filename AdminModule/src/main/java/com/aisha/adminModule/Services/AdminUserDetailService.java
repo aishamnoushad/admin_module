@@ -4,7 +4,7 @@ package com.aisha.adminModule.Services;
 
 
 
-import javax.security.sasl.AuthenticationException;
+
 
 
 import org.slf4j.Logger;
@@ -30,11 +30,9 @@ public class AdminUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		User user = userRepository.findByEmail(email);
-        if (user == null || user.getIsApproved() == false) {
+        if (user == null ) {
 //            throw new UsernameNotFoundException(email);
         	throw new UsernameNotFoundException(email+" The user is not authorised to access admin module");
-        }else if(user.getIsApproved() == false) {
-        	//throw new Exception(email+ "has no permission to access Admin Module ");
         }
         log.info("loadUserByUsername() : {}", email);
 

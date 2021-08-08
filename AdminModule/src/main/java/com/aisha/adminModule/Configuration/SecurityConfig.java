@@ -46,18 +46,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
+		
+		///authorisation
+		  http.authorizeRequests()
+//          .antMatchers("/").hasAnyAuthority("REQUESTER", "ADMIN", "ADMIN_MANAGER")
+          .antMatchers("/admin","/category","/subcategory","/subsubcategory","/products").hasAnyAuthority("REQUESTER", "ADMIN", "ADMIN_MANAGER")
+          .antMatchers("/category/edit/**","/subcategory/edit/**","/subsubcategory/edit/**","/products/edit/**").hasAnyAuthority("ADMIN", "ADMIN_MANAGER")
+          .antMatchers("/category/update/**","/subcategory/update/**","/subsubcategory/update/**","/products/update/**").hasAnyAuthority("ADMIN","ADMIN_MANAGER")
+          .antMatchers("/category/delete/**","/subcategory/delete/**","/subsubcategory/delete/**","/products/delete/**").hasAnyAuthority("ADMIN","ADMIN_MANAGER")
+          .antMatchers("/category/add/**","/subcategory/add/**","/subsubcategory/add/**","/products/add/**").hasAnyAuthority("ADMIN","ADMIN_MANAGER")
+          .antMatchers("/login", "/resource/**","/register","/postLogin","/forgot","/reset_password").permitAll()
+          .antMatchers("/js/**", "/css/**").permitAll()
+          .anyRequest().authenticated()
+          .and()
+          .formLogin().loginPage("/login").permitAll()
+          .and()
+          .logout().permitAll()
+          .and()
+          .exceptionHandling().accessDeniedPage("/unauthorized").and().csrf().disable();
+//          ;
 		// TODO Auto-generated method stub
-		http
-        .authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN", "ADMIN_MANAGER")
-        .and()
-        .authorizeRequests().antMatchers("/login", "/resource/**").permitAll()
-        .and()
-        .formLogin()
-        .successHandler(adminAuthenticationSuccessHandler)
-        .failureHandler(MyAuthenticationFailureHandler)
-        .loginPage("/login")
-        .defaultSuccessUrl("/dashboard")
-        .and().csrf().disable();
+//		http
+//        .authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN", "ADMIN_MANAGER")
+//        .and()
+//        .authorizeRequests().antMatchers("/login", "/resource/**").permitAll()
+//        .and()
+//        .formLogin()
+//        .successHandler(adminAuthenticationSuccessHandler)
+//        .failureHandler(MyAuthenticationFailureHandler)
+//        .loginPage("/login")
+//        .defaultSuccessUrl("/dashboard")
+//        .and().csrf().disable();
 //        .usernameParameter("username").passwordParameter("password").permitAll()
 //        .loginProcessingUrl("/login")
 //        .successForwardUrl("/dashboard")

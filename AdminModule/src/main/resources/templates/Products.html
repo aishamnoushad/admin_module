@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.abcgroupuae.com"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
    <head >
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -48,7 +49,7 @@
                                             <th>Sub Sub Category</th>
                                             <th>Description</th>
                                             <th>Price</th>
-                                            <th colspan="2"><a href="/products/add" class="btn btn-success"><i class="material-icons">add</i>Add</a></th>
+                                            <th colspan="2"><a sec:authorize="hasAnyAuthority('ADMIN_MANAGER', 'ADMIN')" href="/products/add" class="btn btn-success"><i class="material-icons">add</i>Add</a></th>
                                             
                                         </tr>
                                     </thead>
@@ -82,8 +83,8 @@
 								           <td colspan="2">
 								            <a th:href="@{/products/view/{Product_id}(Product_id=${product.Product_id})}" class="btn btn-warning" type="button"><i class="fa fa-eye"></i>View</a>
 								           
-								            <a th:href="@{/products/update/{Product_id}(Product_id=${product.Product_id})}" class="btn btn-secondary" type="button"><i class="material-icons">update</i>Edit</a>
-								           <a  th:href="@{/products/delete/{Product_id}(Product_id=${product.Product_id})}" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+								            <a sec:authorize="hasAnyAuthority('ADMIN_MANAGER', 'ADMIN')" th:href="@{/products/update/{Product_id}(Product_id=${product.Product_id})}" class="btn btn-secondary" type="button"><i class="material-icons">update</i>Edit</a>
+								           <a sec:authorize="hasAnyAuthority('ADMIN_MANAGER', 'ADMIN')" th:href="@{/products/delete/{Product_id}(Product_id=${product.Product_id})}" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
 								            </td>
 								        </tr>
                                        

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.aisha.adminModule.Entity.User;
@@ -41,10 +42,17 @@ public class IndexController {
 	
 	@GetMapping("/login")
 	public String index(Model model) {
+		if(model.getAttribute("message")!=null)
+			model.addAttribute("message", model.getAttribute("message"));
 		model.addAttribute("logginguser", new User());
 		return "login";
 	}
-
+	
+	@GetMapping("/unauthorized")
+	public String AcccessDeniedPage() {
+		return "unauthoried";
+	} 
+	
 	@RequestMapping("/dashboard")
 	public String redirectToDashboard(Model model) {
 		model.addAttribute("users", activeUserStore.getUsers());
@@ -71,12 +79,13 @@ public class IndexController {
 		
 		validatePrinciple(authentication.getPrincipal());
 		User loggedInUser = ((MyUserPrincipal) authentication.getPrincipal()).getUser();
-		log.info("postLogin()" + loggedInUser.getId());
-		model.addAttribute("currentUserId", loggedInUser.getId());
+		log.info("postLogin()" + loggedInUser.getUser_id());
+		log.info("postLogin()" + loggedInUser.getRoles());
+		model.addAttribute("currentUserId", loggedInUser.getUser_id());
 		log.info("postLogin()" + loggedInUser.getName());
 		model.addAttribute("currentUser", loggedInUser.getName());
-		log.info("postLogin()" + loggedInUser.getId());
-		session.setAttribute("userId", loggedInUser.getId());
+		log.info("postLogin()" + loggedInUser.getUser_id());
+		session.setAttribute("userId", loggedInUser.getUser_id());
 		session.setAttribute("userName", loggedInUser.getName());
 		session.setAttribute("ActiveUser", loggedInUser);
 		return "redirect:/dashboard";
@@ -94,4 +103,20 @@ public class IndexController {
 		session.setComplete();
 		return "redirect:/login";
 	}
+	
+	
+	
+//	@RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
+//	public String loginError(Model model) {
+//		log.info("Login attempt failed");
+//		model.addAttribute("error", "true");
+//		return "login";
+//	}
+//
+//	@RequestMapping("/error-forbidden")
+//	public String errorForbidden() {
+//		return "error-forbidden";
+//	}
+	
+	
 }

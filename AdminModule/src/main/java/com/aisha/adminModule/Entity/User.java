@@ -3,12 +3,21 @@ package com.aisha.adminModule.Entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
@@ -18,17 +27,21 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name="users")
 public class User implements Serializable {
+	private static final long serialVersionUID = 5381833182834534405L;
 	public User() {
 
 	}
 	@Id
+	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int user_id;
 	private String name;
 	private String email;
 	private Date email_verified_at;
 	private String password;
+	@Transient
 	private int role;
+	@Transient
 	private String roleName;
 	private String remember_token;
 	private String mobileNumber;
@@ -36,11 +49,21 @@ public class User implements Serializable {
 	private LocalDateTime created_at;
 	private LocalDateTime updated_at;
 	private Boolean isApproved;
+	 @Column(name = "reset_password_token")
+	    private String resetPasswordToken;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	    @JoinTable(
+	            name = "users_roles",
+	            joinColumns = @JoinColumn(name = "user_id"),
+	            inverseJoinColumns = @JoinColumn(name = "role_id")
+	            )
+	private Set<RoleTB> roles = new HashSet<>();
 
 	public User(int id, String name, String email, Date email_verified_at, String password, int role, String roleName,
 			String remember_token, String mobileNumber, String profile_photo_path, LocalDateTime created_at, LocalDateTime updated_at,Boolean isApproved) {
 		super();
-		this.id = id;
+		this.user_id = id;
 		this.name = name;
 		this.email = email;
 		this.email_verified_at = email_verified_at;
@@ -54,11 +77,11 @@ public class User implements Serializable {
 		this.updated_at = updated_at;
 		this.isApproved=isApproved;
 	}
-	public int getId() {
-		return id;
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUser_id(int id) {
+		this.user_id = id;
 	}
 	public String getName() {
 		return name;
@@ -132,9 +155,23 @@ public class User implements Serializable {
 	public void setIsApproved(Boolean isApproved) {
 		this.isApproved = isApproved;
 	}
+	
+	public Set<RoleTB> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<RoleTB> roles) {
+		this.roles = roles;
+	}
+	
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", email_verified_at=" + email_verified_at
+		return "User [id=" + user_id + ", name=" + name + ", email=" + email + ", email_verified_at=" + email_verified_at
 				+ ", password=" + password + ", role=" + role + ", roleName=" + roleName + ", remember_token="
 				+ remember_token + ", mobileNumber=" + mobileNumber + ", profile_photo_path=" + profile_photo_path
 				+ ", created_at=" + created_at + ", updated_at=" + updated_at + ", isApproved=" + isApproved + "]";

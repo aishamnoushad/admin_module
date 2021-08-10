@@ -2,29 +2,35 @@ package com.aisha.adminModule.Services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.security.auth.login.AccountNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aisha.adminModule.Entity.User;
+import com.aisha.adminModule.Entity.User_Roles;
 import com.aisha.adminModule.Repository.UserRepository;
+import com.aisha.adminModule.Repository.UserRolesRepository;
 
 @Service
 @Transactional
 public class UserService {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private UserRolesRepository UserRolesRepository;
 	@Transactional
 	public User AddUserRequest(User user) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	    String encodedPassword = passwordEncoder.encode(user.getPassword());
 	    user.setPassword(encodedPassword);
-	    user.setIsApproved(false);
+	    user.setStatus(5);
 	    user.setRole(3);
 	    user.setCreated_at(LocalDateTime.now());
 	    user.setUpdated_at(LocalDateTime.now());
@@ -32,7 +38,7 @@ public class UserService {
 	}
 	
 	public List<User> getAllUserRequest(){
-		return userRepository.findAll().stream().filter(t->!t.getIsApproved()).collect(Collectors.toList());
+		return userRepository.findAll().stream().filter(t->t.getStatus()==5).collect(Collectors.toList());
 		
 	}
 	
@@ -54,9 +60,32 @@ public class UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
-         
         user.setResetPasswordToken(null);
         userRepository.save(user);
     }
-
+    
+    public User deleteUser(int user_id) {
+    	return userRepository.deleteById(user_id);
+    }
+    
+    public Optional<User> findByUserId(int user_id) {
+    	return userRepository.findById(user_id);
+    }
+    @Transactional
+    @Modifying
+    public void approveRequest(User user) {
+        user.setStatus(2);
+        user.setApproved_date(LocalDateTime.now());
+        int done =UserRolesRepository.deleteRequestorRoleOnceApproved(user.getUser_id());
+        System.out.println(done);
+        User_Roles userRole = new User_Roles();
+        userRole.setUser_id(user.getUser_id());
+        userRole.setRole_id(2);
+        User_Roles User_Roles = UserRolesRepository.save(userRole);
+        System.out.println(User_Roles);
+        userRepository.save(user);
+    }
+    public List<User> gettingAllApprovedAdmins(){
+    	return userRepository.findAllBystatus(2);
+    }
 }

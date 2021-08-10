@@ -14,4 +14,9 @@ public class UserRoleService {
 	public User_Roles  saveUserRole(User_Roles user_Roles) {
 		return user_RolesRepo.saveAndFlush(user_Roles);
 	}
+	
+	
+	public int deleteAllUserRolesOfGivenId(int user_id) {
+		return user_RolesRepo.deleteAllUserRolesOfGivenId(user_id);
+	}
 }

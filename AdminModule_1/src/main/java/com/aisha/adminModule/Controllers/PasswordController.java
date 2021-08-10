@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.aisha.adminModule.Entity.User;
@@ -103,7 +104,7 @@ public class PasswordController {
 	     
 	    if (user == null) {
 	        model.addAttribute("message", "Invalid Token");
-	        return "message";
+	       // return "message";
 	    } else {           
 	    	UserService.updatePassword(user, password);
 	         
@@ -111,5 +112,35 @@ public class PasswordController {
 	    }
 	     
 	    return "redirect:/login";
+	}
+	
+	@GetMapping("/user_request/reset_password/{user_id}")
+	public String showpasswordresetpage(@PathVariable(value="user_id") int UserId, Model model){
+		User user = new User();
+		if(UserService.findByUserId(UserId).isPresent())
+			user = UserService.findByUserId(UserId).get();
+		
+			if (user == null || user.getUser_id() ==0) {
+		        model.addAttribute("message", "No Account Found");
+		        return "admin_reset_password";
+		    }
+			model.addAttribute("user_id", user.getUser_id());
+		  return "admin_reset_password";
+	}
+	
+	@PostMapping("/user_request/reset_password/{user_id}")
+	public String processResetPasswordByAdmin(HttpServletRequest request, Model model) {
+	    int user_id =Integer.parseInt(request.getParameter("user_id"));
+	    String password = request.getParameter("password");
+	    User user = new User();
+	     if(UserService.findByUserId(user_id).isPresent()) {
+	    	 user=UserService.findByUserId(user_id).get();
+	    	 UserService.updatePassword(user, password);
+	    	 model.addAttribute("message", "You have successfully changed password of "+ user.getName());
+	     }else {
+	    	 model.addAttribute("message", "Invalid Token");
+	    	
+	     }
+	     return "admin_reset_password";
 	}
 }

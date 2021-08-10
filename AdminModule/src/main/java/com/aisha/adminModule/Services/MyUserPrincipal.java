@@ -1,17 +1,12 @@
 package com.aisha.adminModule.Services;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.aisha.adminModule.Entity.RoleTB;
 import com.aisha.adminModule.Entity.User;
 
 @Component
@@ -21,74 +16,51 @@ public class MyUserPrincipal implements UserDetails {
 	 */
 	@Autowired
 	private User user;
-	
-	
-	 public MyUserPrincipal() {
-	        
-	    }
 
     public MyUserPrincipal(User user) {
-        this.setUser(user);
+        this.user = user;
     }
     //...
-    public Boolean getIsApproved() {
-    	return user.getIsApproved();
-    }
-    
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<RoleTB> roles = user.getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-         
-        for (RoleTB role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole_name()));
-        }
-         
-        return authorities;
-    }
-	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return user.getPassword();
+		return null;
 	}
-	
+
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return user.getEmail();
+		return null;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+		return false;
 	}
 }
